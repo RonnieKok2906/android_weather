@@ -14,8 +14,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
 import androidx.compose.material3.adaptive.layout.PaneAdaptedValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 
@@ -91,11 +89,12 @@ fun ListDetailScreen(
                 ItemDetailPane(
                     itemDetails = detailsToDisplay,
                     // Pass onNavigateBack only if the detail pane is the primary one (compact mode)
-                    onNavigateBack = if (navigator.scaffoldValue[ListDetailPaneScaffoldRole.Detail] != PaneAdaptedValue.Hidden) {
+                    onNavigateBack = if (navigator.scaffoldValue[ListDetailPaneScaffoldRole.List] == PaneAdaptedValue.Hidden &&
+                            navigator.scaffoldValue[ListDetailPaneScaffoldRole.Detail] == PaneAdaptedValue.Expanded) {
                         // In dual-pane layout, back might be handled differently or not needed here
-                        null
+                        { listDetailViewModel.clearSelection() }
                     } else {
-                        { listDetailViewModel.clearSelection() } // Or navigator::navigateBack
+                       null // Or navigator::navigateBack
                     }
                 )
             }
