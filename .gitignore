@@ -1,3 +1,4 @@
+gitignore
 # Compiled class file
 *.class
 
@@ -25,3 +26,36 @@ replay_pid*
 
 # Kotlin Gradle plugin data, see https://kotlinlang.org/docs/whatsnew20.html#new-directory-for-kotlin-data-in-gradle-projects
 .kotlin/
+
+# Android Gradle
+.gradle/
+build/
+local.properties
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+
+# Generated code
+*/build/generated/
+
+# Keystores (IMPORTANT: Never commit your release keystore)
+*.jks
+*.keystore
+
+# Captures
+captures/
+
+# Test reports
+*/build/reports/
+*/build/test-results/
+
+# Lint reports
+*/build/outputs/lint-results-*
