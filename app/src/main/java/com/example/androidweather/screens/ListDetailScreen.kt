@@ -36,19 +36,12 @@ fun ListDetailScreen(
     val uiState by listDetailViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
 
-    // `rememberListDetailPaneScaffoldNavigator` helps manage navigation between list/detail
-    // and adapts to screen size.
     val navigator = rememberListDetailPaneScaffoldNavigator<String?>()
-    // For String? type argument: pass the selected item's ID or null if nothing is selected.
 
     LaunchedEffect(uiState.selectedItemId, uiState.showDetailPaneFullScreen) {
         if (uiState.selectedItemId != null) {
-            // If an item is selected, try to navigate to the detail pane.
-            // `canNavigateTo` checks if the detail pane can be shown (e.g., if it's not already visible
-            // in a side-by-side layout).
             navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, uiState.selectedItemId)
         } else {
-            // If no item is selected (or selection cleared), navigate back to the list pane.
             navigator.navigateTo(ListDetailPaneScaffoldRole.List, contentKey = null)
         }
 
@@ -69,10 +62,8 @@ fun ListDetailScreen(
                             val listVisible = navigator.scaffoldValue[ListDetailPaneScaffoldRole.List] != PaneAdaptedValue.Hidden
 
                             if (listVisible) {
-                                // Hide list by navigating to detail only
                                 navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, contentKey = uiState.selectedItemId)
                             } else {
-                                // Show list again
                                 navigator.navigateTo(ListDetailPaneScaffoldRole.List, contentKey = null)
                             }
                         }
@@ -99,22 +90,13 @@ fun ListDetailScreen(
             },
             detailPane = {
                 AnimatedPane(modifier = Modifier) {
-                    // Check if there is a selected item based on the navigator's scaffoldValue
-                    val currentSelectedItemId: String? = navigator.currentDestination?.takeIf { it.pane == ListDetailPaneScaffoldRole.Detail }?.contentKey
+                    val currentSelectedItemId = navigator.currentDestination?.takeIf { it.pane == ListDetailPaneScaffoldRole.Detail }?.contentKey
 
                     val detailsToDisplay = if (currentSelectedItemId == uiState.selectedItemId) {
                         uiState.selectedItemDetails
                     } else {
-                        // If navigator's selected item differs from ViewModel (e.g., during back navigation),
-                        // you might want to load details for navigator.scaffoldValue.secondaryPaneState?.content
-                        // or simply show a placeholder/loading until ViewModel catches up.
-                        // For simplicity, we'll rely on the ViewModel being the source of truth for details.
-                        // This could also mean we should fetch details based on `currentSelectedItemId` if it's different.
-                        if (currentSelectedItemId != null && currentSelectedItemId != uiState.selectedItemId) {
-                            // Potentially trigger a load for currentSelectedItemId if not already loaded
-                            // For now, let's assume the ViewModel handles keeping selectedItemDetails consistent
-                            // with selectedItemId
-                            null // Or a loading state
+                        if (currentSelectedItemId != null) {
+                            null
                         } else {
                             uiState.selectedItemDetails
                         }
@@ -122,18 +104,15 @@ fun ListDetailScreen(
 
                     ItemDetailPane(
                         itemDetails = detailsToDisplay,
-                        // Pass onNavigateBack only if the detail pane is the primary one (compact mode)
                         onNavigateBack = if (navigator.scaffoldValue[ListDetailPaneScaffoldRole.List] == PaneAdaptedValue.Hidden &&
                             navigator.scaffoldValue[ListDetailPaneScaffoldRole.Detail] == PaneAdaptedValue.Expanded) {
-                            // In dual-pane layout, back might be handled differently or not needed here
                             { scope.launch { navigator.navigateBack() } }
                         } else {
-                            null // Or navigator::navigateBack
+                            null
                         }
                     )
                 }
-            },
-            // You can also provide an optional `extraPane` for three-pane layouts
+            }
         )
     }
 }
