@@ -16,8 +16,7 @@ import com.example.androidweather.models.WeatherDetail
 fun ItemDetailPane(
     itemDetails: WeatherDetail?,
     onNavigateBack: (() -> Unit)?, // Nullable if back navigation is handled differently on large screens
-    modifier: Modifier = Modifier
-) {
+    modifier: Modifier = Modifier) {
     Scaffold(
         topBar = {
             // Show TopAppBar with back button only if onNavigateBack is provided (typical for compact screens)
