@@ -22,7 +22,7 @@ fun DetailPane(
             // Show TopAppBar with back button only if onNavigateBack is provided (typical for compact screens)
             if (onNavigateBack != null) {
                 TopAppBar(
-                    title = { Text(itemDetails?.title ?: "Details") },
+                    title = { Text(itemDetails?.city ?: "Details") },
                     navigationIcon = {
                         IconButton(onClick = onNavigateBack) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -48,7 +48,7 @@ fun DetailPane(
                     .padding(16.dp)
                     .fillMaxSize()
             ) {
-                Text(itemDetails.title, style = MaterialTheme.typography.headlineMedium)
+                Text(itemDetails.city, style = MaterialTheme.typography.headlineMedium)
                 Spacer(Modifier.height(8.dp))
                 // You might use Coil or Glide to load an image here if itemDetails.imageUrl is not null
                 if (itemDetails.imageUrl != null) {

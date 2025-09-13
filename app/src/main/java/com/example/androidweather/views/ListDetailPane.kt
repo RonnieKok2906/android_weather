@@ -9,8 +9,6 @@ import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaf
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.androidweather.viewModels.ListDetailUiState
 import com.example.androidweather.viewModels.ListDetailViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.collectAsState

@@ -20,6 +20,7 @@ fun ListPane(
             .fillMaxSize()) {
         items(items, key = { it.id }) { item ->
             WeatherCard(
+                weather = item,
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onItemSelected(item.id) }

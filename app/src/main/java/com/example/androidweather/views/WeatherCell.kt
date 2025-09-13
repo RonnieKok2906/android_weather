@@ -23,9 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.androidweather.models.Weather
 
 @Composable
-fun WeatherCard(modifier: Modifier = Modifier) {
+fun WeatherCard(weather: Weather, modifier: Modifier = Modifier) {
     ElevatedCard(
         modifier = modifier
             .fillMaxWidth()
@@ -51,19 +52,19 @@ fun WeatherCard(modifier: Modifier = Modifier) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column {
-                    Text("Haarlem", style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onPrimary)
-                    Text("05:39", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onPrimary)
+                    Text(weather.city, style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onPrimary)
+                    Text(weather.time, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onPrimary)
                     Spacer(modifier = Modifier.weight(1f))
-                    Text("Regen verwacht in het komende uur", modifier = Modifier.widthIn(max = 130.dp), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onPrimary)
+                    Text(weather.weatherSummary, modifier = Modifier.widthIn(max = 130.dp), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onPrimary)
                 }
 
                 Column(horizontalAlignment = Alignment.End) {
-                    Text("17°", style = MaterialTheme.typography.displayLarge, color = MaterialTheme.colorScheme.onPrimary)
+                    Text(weather.currentTemp, style = MaterialTheme.typography.displayLarge, color = MaterialTheme.colorScheme.onPrimary)
 
                     Row {
-                        Text("Max: 16°", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onPrimary)
+                        Text("Max: ${weather.maximumTemp}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onPrimary)
                         Spacer(Modifier.width(8.dp))
-                        Text("Min: 4°", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onPrimary)
+                        Text("Min: ${weather.minimumTemp}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onPrimary)
                     }
                 }
             }
@@ -79,6 +80,14 @@ fun WeatherCard(modifier: Modifier = Modifier) {
 @Composable
 fun WeatherCardPreview() {
     Box(Modifier.padding(16.dp)) {
-        WeatherCard()
+        WeatherCard(weather = Weather(
+            id = "item_1",
+            city = "Haarlem",
+            time = "23:29",
+            minimumTemp = "20°C",
+            maximumTemp = "30°C",
+            currentTemp = "25°C",
+            weatherSummary = "This is a short summary for item 1."
+        ))
     }
 }
