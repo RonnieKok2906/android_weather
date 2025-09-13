@@ -54,7 +54,7 @@ dependencies {
     implementation(libs.compose.material3.adaptive.navigation)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.material3)
-    implementation(libs.androidx.compose.material3.windowSizes)
+    implementation(libs.material3WindowSize)
     implementation(libs.androidx.compose.foundation.layout)
     implementation(libs.androidx.compose.runtime)
     testImplementation(libs.junit)
