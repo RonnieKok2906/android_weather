@@ -74,6 +74,7 @@ fun ListDetailScreen(
                         ListPane(
                             items = uiState.items,
                             onItemSelected = { id -> listDetailViewModel.selectItem(id) },
+                            selectedItemId = uiState.selectedItemId,
                             modifier = Modifier.fillMaxSize()
                         )
                     },

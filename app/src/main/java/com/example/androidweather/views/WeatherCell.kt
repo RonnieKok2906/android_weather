@@ -1,6 +1,7 @@
 package com.example.androidweather.views
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,10 +27,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.androidweather.models.Weather
 
 @Composable
-fun WeatherCard(weather: Weather, modifier: Modifier = Modifier) {
+fun WeatherCard(weather: Weather, selected: Boolean, modifier: Modifier = Modifier) {
     ElevatedCard(
         modifier = modifier
             .fillMaxWidth()
+            .border(
+                width = if (selected) 5.dp else 0.dp,
+                color = Color.LightGray,
+                shape = RoundedCornerShape(16.dp)
+            )
             .height(120.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
@@ -88,6 +94,7 @@ fun WeatherCardPreview() {
             maximumTemp = "30°C",
             currentTemp = "25°C",
             weatherSummary = "This is a short summary for item 1."
-        ))
+        ),
+            selected = true)
     }
 }

@@ -44,6 +44,7 @@ fun ListDetailPane(
                                 )
                             }
                         },
+                        selectedItemId = uiState.selectedItemId,
                         modifier = Modifier
                     )
                 }

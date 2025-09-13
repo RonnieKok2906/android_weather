@@ -12,6 +12,7 @@ import com.example.androidweather.models.Weather
 @Composable
 fun ListPane(
     items: List<Weather>,
+    selectedItemId: String?,
     onItemSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -21,6 +22,7 @@ fun ListPane(
         items(items, key = { it.id }) { item ->
             WeatherCard(
                 weather = item,
+                selected = item.id == selectedItemId,
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onItemSelected(item.id) }
