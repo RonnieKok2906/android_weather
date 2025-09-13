@@ -16,17 +16,16 @@ fun ItemListPane(
     onItemSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(modifier = modifier.fillMaxSize()) {
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()) {
         items(items, key = { it.id }) { item ->
-            ListItem(
-                headlineContent = { Text(item.title) },
-                supportingContent = { Text(item.summary) },
+            WeatherCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onItemSelected(item.id) }
                     .padding(horizontal = 16.dp, vertical = 8.dp)
             )
-            HorizontalDivider()
         }
     }
 }

@@ -25,9 +25,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun WeatherCard() {
+fun WeatherCard(modifier: Modifier = Modifier) {
     ElevatedCard(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(120.dp),
         shape = RoundedCornerShape(16.dp)
