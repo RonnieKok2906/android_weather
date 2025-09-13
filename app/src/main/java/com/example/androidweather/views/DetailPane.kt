@@ -13,7 +13,7 @@ import com.example.androidweather.models.WeatherDetail
 // --- Detail Pane Composable ---
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemDetailPane(
+fun DetailPane(
     itemDetails: WeatherDetail?,
     onNavigateBack: (() -> Unit)?, // Nullable if back navigation is handled differently on large screens
     modifier: Modifier = Modifier) {

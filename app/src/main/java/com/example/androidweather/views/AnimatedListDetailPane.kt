@@ -14,7 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 
 @Composable
-fun AnimatedDetailListPane(
+fun AnimatedListDetailPane(
     showList: Boolean,
     list: @Composable () -> Unit,
     detail: @Composable () -> Unit

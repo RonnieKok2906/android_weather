@@ -26,9 +26,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.androidweather.viewModels.ListDetailViewModel
-import com.example.androidweather.views.AnimatedDetailListPane
-import com.example.androidweather.views.ItemDetailPane
-import com.example.androidweather.views.ItemListPane
+import com.example.androidweather.views.AnimatedListDetailPane
+import com.example.androidweather.views.DetailPane
+import com.example.androidweather.views.ListPane
 import com.example.androidweather.views.ListDetailPane
 import kotlinx.coroutines.launch
 
@@ -68,10 +68,10 @@ fun ListDetailScreen(
     ) { innerPadding ->
         Box(Modifier.padding(innerPadding)) {
             if(animateSideMenu) {
-                AnimatedDetailListPane(
+                AnimatedListDetailPane(
                     showList = menuVisible,
                     list = {
-                        ItemListPane(
+                        ListPane(
                             items = uiState.items,
                             onItemSelected = { id -> listDetailViewModel.selectItem(id) },
                             modifier = Modifier.fillMaxSize()
@@ -90,7 +90,7 @@ fun ListDetailScreen(
                                 null
                             }
 
-                        ItemDetailPane(
+                        DetailPane(
                             itemDetails = detailsToDisplay,
                             modifier = Modifier.fillMaxWidth(),
                             onNavigateBack = null

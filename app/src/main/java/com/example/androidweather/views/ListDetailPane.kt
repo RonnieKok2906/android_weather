@@ -1,10 +1,5 @@
 package com.example.androidweather.views
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.expandHorizontally
-import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
@@ -37,7 +32,7 @@ fun ListDetailPane(
         listPane = {
             if (menuVisible) {
                 AnimatedPane {
-                    ItemListPane(
+                    ListPane(
                         items = uiState.items,
                         onItemSelected = { id ->
                             listDetailViewModel.selectItem(id)
@@ -69,7 +64,7 @@ fun ListDetailPane(
                         null
                     }
 
-                ItemDetailPane(
+                DetailPane(
                     itemDetails = detailsToDisplay,
                     modifier = Modifier.fillMaxWidth(),
                     onNavigateBack = null
