@@ -13,15 +13,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.androidweather.viewModels.ListDetailUiState
 import com.example.androidweather.viewModels.ListDetailViewModel
 import kotlinx.coroutines.launch
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun ListDetailPane(
-    uiState: ListDetailUiState,
-    listDetailViewModel: ListDetailViewModel = viewModel(),
+    listDetailViewModel: ListDetailViewModel,
     menuVisible: Boolean
 ) {
     val navigator = rememberListDetailPaneScaffoldNavigator<String?>()
+    val uiState by listDetailViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
 
     ListDetailPaneScaffold(

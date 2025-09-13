@@ -99,7 +99,6 @@ fun ListDetailScreen(
                 )
             } else {
                 ListDetailPane(
-                    uiState = uiState,
                     listDetailViewModel = listDetailViewModel,
                     menuVisible = menuVisible
                 )
