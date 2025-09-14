@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 data class ListDetailUiState(
     val items: List<Weather> = emptyList(),
     var selectedItemId: String? = null,
+    var selectedWeather: Weather? = null,
     val selectedItemDetails: WeatherDetail? = null,
     val isLoadingDetails: Boolean = false,
     val showDetailPaneFullScreen: Boolean = false // For compact screen navigation
@@ -52,10 +53,12 @@ class ListDetailViewModel : ViewModel() {
         viewModelScope.launch {
             // In a real app, fetch from a repository asynchronously
             kotlinx.coroutines.delay(300) // Simulate network delay
+            val weather = sampleItems.find { it.id == itemId }
             val details = sampleItemDetails[itemId]
 
             _uiState.update {
                 it.copy(
+                    selectedWeather = weather,
                     selectedItemDetails = details,
                     isLoadingDetails = false
                 )

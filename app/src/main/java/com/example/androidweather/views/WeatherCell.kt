@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.androidweather.models.Weather
+import com.example.androidweather.models.WeatherCondition
 
 @Composable
 fun WeatherCard(weather: Weather, selected: Boolean, modifier: Modifier = Modifier) {
@@ -33,7 +34,7 @@ fun WeatherCard(weather: Weather, selected: Boolean, modifier: Modifier = Modifi
             .fillMaxWidth()
             .border(
                 width = if (selected) 5.dp else 0.dp,
-                color = Color.LightGray,
+                color = Color.LightGray.copy(alpha = 0.8f),
                 shape = RoundedCornerShape(16.dp)
             )
             .height(120.dp),
@@ -44,9 +45,7 @@ fun WeatherCard(weather: Weather, selected: Boolean, modifier: Modifier = Modifi
                 Modifier
                     .matchParentSize()
                     .background(
-                        Brush.verticalGradient(
-                            listOf(Color(0xFF333344), Color(0xFF222233))
-                        )
+                        Brush.verticalGradient(colors = weather.condition.gradientColors())
                     )
             )
 
@@ -65,7 +64,8 @@ fun WeatherCard(weather: Weather, selected: Boolean, modifier: Modifier = Modifi
                 }
 
                 Column(horizontalAlignment = Alignment.End) {
-                    Text(weather.currentTemp, style = MaterialTheme.typography.displayLarge, color = MaterialTheme.colorScheme.onPrimary)
+                    val color = if (weather.condition != WeatherCondition.SNOWY) MaterialTheme.colorScheme.onPrimary else weather.condition.gradientColors().getOrNull(2)?.copy(alpha = 0.8f) ?: Color.White
+                    Text(weather.currentTemp, style = MaterialTheme.typography.displayLarge, color = color)
 
                     Row {
                         Text("Max: ${weather.maximumTemp}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onPrimary)
@@ -93,7 +93,8 @@ fun WeatherCardPreview() {
             minimumTemp = "20°C",
             maximumTemp = "30°C",
             currentTemp = "25°C",
-            weatherSummary = "This is a short summary for item 1."
+            weatherSummary = "This is a short summary for item 1.",
+            condition = WeatherCondition.LIGHTCLOUDY
         ),
             selected = true)
     }
